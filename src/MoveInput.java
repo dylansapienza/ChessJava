@@ -9,20 +9,18 @@ public class MoveInput {
         //[1-8][A-H]
         // This gives the character 'a'
 
+        //Subtracts The Ascii A offset 65
         processedMoves[0][0] = moves[0].charAt(0)-65;
+        //Subtracts the Ascii 0 offset
         processedMoves[0][1] = moves[0].charAt(1)-49;
+
 
         processedMoves[1][0] = moves[1].charAt(0)-65;
         processedMoves[1][1] = moves[1].charAt(1)-49;
 
-        // A1 -> B4
-        // [0][0] -> [7][0]
-        // [1][3] -> [4][1]
-        // C2 -> F5
-        // [2][1] -> [5][4]
-        // [6][2] -> [3][5]
+        // X,Y -> Y,X
+        // Nums need to be flipped
         //
-        // Swap Move Digits X,Y -> Y,X
         // Invert x (0 -> 7)
         //          (1 -> 6)
         //          (2 -> 5)
@@ -31,6 +29,22 @@ public class MoveInput {
         //          (5 -> 2)
         //          (6 -> 1)
         //          (7 -> 0)
+
+        // X = 7-X
+
+        processedMoves[0][1] = 7 - processedMoves[0][1];
+        processedMoves[1][1] = 7 - processedMoves[1][1];
+
+        int swaphold;
+
+        swaphold = processedMoves[0][0];
+        processedMoves[0][0] = processedMoves[0][1];
+        processedMoves[0][1] = swaphold;
+
+        swaphold = processedMoves[1][0];
+        processedMoves[1][0] = processedMoves[1][1];
+        processedMoves[1][1] = swaphold;
+
 
         return processedMoves;
     }

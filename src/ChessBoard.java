@@ -45,6 +45,7 @@ public class ChessBoard {
         String origin = this.board[input[0][0]][input[0][1]];
         this.board[input[0][0]][input[0][1]] = "_";
         this.board[input[1][0]][input[1][1]] = origin;
+
     }
 
 }
