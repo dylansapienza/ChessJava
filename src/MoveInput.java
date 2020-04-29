@@ -7,7 +7,6 @@ public class MoveInput {
         System.out.println(moves[0] + "->" + moves[1]);
 
         //[1-8][A-H]
-        // This gives the character 'a'
 
         //Subtracts The Ascii A offset 65
         processedMoves[0][0] = moves[0].charAt(0)-65;
@@ -20,15 +19,6 @@ public class MoveInput {
 
         // X,Y -> Y,X
         // Nums need to be flipped
-        //
-        // Invert x (0 -> 7)
-        //          (1 -> 6)
-        //          (2 -> 5)
-        //          (3 -> 4)
-        //          (4 -> 3)
-        //          (5 -> 2)
-        //          (6 -> 1)
-        //          (7 -> 0)
 
         // X = 7-X
 

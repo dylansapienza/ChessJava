@@ -11,14 +11,14 @@ public class ChessBoard {
     }
 
     public void initialize(){
-        String[][] newBoard = {{"BR","BK","BB","BQ","BK","BB","BK","BR"},
+        String[][] newBoard = {{"BR","BK","BB","BQ","B!","BB","BK","BR"},
                                 {"BP","BP","BP","BP","BP","BP","BP","BP"},
                                 {"_" ,"_" ,"_" ,"_" ,"_" ,"_" ,"_" ,"_" },
                                 {"_" ,"_" ,"_" ,"_" ,"_" ,"_" ,"_" ,"_" },
                                 {"_" ,"_" ,"_" ,"_" ,"_" ,"_" ,"_" ,"_" },
                                 {"_" ,"_" ,"_" ,"_" ,"_" ,"_" ,"_" ,"_" },
                                 {"WP","WP","WP","WP","WP","WP","WP","WP"},
-                                {"WR","WK","WB","WQ","WK","WB","WK","WR"}
+                                {"WR","WK","WB","WQ","W!","WB","WK","WR"}
                                 };
 
         this.board = newBoard;
@@ -47,5 +47,17 @@ public class ChessBoard {
         this.board[input[1][0]][input[1][1]] = origin;
 
     }
+    public String getPiece(int[][] move, int origindest) {
+        //if origindest == 0 return origin spot
+        //if origindest == 1 return destination spot
+        if (origindest == 0) {
+            return board[move[0][0]][move[0][1]];
+        }
+        if (origindest == 1) {
+            return board[move[1][0]][move[1][1]];
+        }
+        return "";
+    }
+
 
 }
