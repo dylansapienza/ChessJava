@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class MoveValidation {
 
     public static boolean validate(int[][] move, GameHandler game){
@@ -15,11 +17,10 @@ public class MoveValidation {
         }
 
         if(!checkPieceRules(move, game)){
-
+            return false;
         }
 
-
-
+        return true;
 
     }
 
@@ -74,10 +75,68 @@ public class MoveValidation {
         String origin = game.board.getPiece(move, 0);
         String dest = game.board.getPiece(move, 1);
 
-        switch (origin.charAt(1)){
-            //
-            case:
+        //You can't make a move into your own piece
+        //UNLESS its the rook king side stuff
+        if(dest.charAt(0) == 'W' && game.turn == 1){
+            return false;
         }
+
+        if(dest.charAt(0) == 'B' && game.turn == 0){
+            return false;
+        }
+
+
+        //origin.charAt 1 will give us the piece type
+        //from our origin location, locate all the possible destinations
+        //if dest != possible destination invalid!
+        switch (origin.charAt(1)){
+            //Pawn
+            case 'P':
+                //1. Can move forward one square
+                if(game.turn == 1){
+
+                     if(move[1][0] == move[0][0] -1 && move[1][1] == move[0][1]){
+                         return true;
+                     }
+
+                }
+
+                if(game.turn == 0){
+                    if(move[1][0] == move[0][0] +1 && move[1][1] == move[0][1]){
+                        return true;
+                    }
+                }
+
+
+                break;
+            //Knight
+            case 'K':
+
+                break;
+            //Rook
+            case 'R':
+
+                break;
+            //Bishop
+            case 'B':
+
+                break;
+            //Queen
+            case 'Q':
+
+                break;
+
+            //King
+            case '!':
+
+                break;
+
+            default:
+                return false;
+
+        }
+
+        return false;
     }
 
 

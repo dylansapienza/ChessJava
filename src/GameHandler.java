@@ -2,10 +2,10 @@ import java.util.Scanner;
 
 public class GameHandler {
 
-    String w_name = "";
-    String b_name = "";
+    String w_name;
+    String b_name;
     int turn = 0; // Black = 1, White = 0
-    ChessBoard board = null;
+    ChessBoard board;
 
 
     public GameHandler(String white, String black){
@@ -25,9 +25,7 @@ public class GameHandler {
         System.out.println("Black Player Name: ");
         String black = scnr.nextLine();
 
-        GameHandler game = new GameHandler(white, black);
-
-        return game;
+        return new GameHandler(white, black);
     }
 
     public void gameContinue(GameHandler game){
@@ -37,6 +35,7 @@ public class GameHandler {
             System.out.println("\n\n");
             System.out.println(w_name+ "'s Turn!");
             turn++; //Check turn, if 1 then its white moving, if 0 its black
+            return;
 
         }
 
@@ -45,6 +44,7 @@ public class GameHandler {
             System.out.println("\n\n");
             System.out.println(b_name+ "'s Turn!");
             turn--;
+            return;
 
         }
     }

@@ -16,10 +16,19 @@ public class ChessGame {
 //        board.print();
         GameHandler game = GameHandler.setup();
 
+        //true should be a gamestatus checker
         while(true){
             game.gameContinue(game);
+
             int[][] move = MoveInput.processMove(MoveInput.promptInput());
-            MoveValidation.validate(move, game);
+
+            while(!MoveValidation.validate(move, game)){
+                System.out.println("Invalid Move Try again!");
+                move = MoveInput.processMove(MoveInput.promptInput());
+            }
+
+            game.board.move(move);
+
         }
 
 
