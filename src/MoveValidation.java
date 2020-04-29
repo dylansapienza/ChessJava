@@ -75,6 +75,13 @@ public class MoveValidation {
         String origin = game.board.getPiece(move, 0);
         String dest = game.board.getPiece(move, 1);
 
+        //You cannot move a piece to its own position
+
+        if(move[0][0] == move[0][1] && move[1][0] == move[1][1]){
+            System.out.println("You can't keep your piece in the same position!");
+            return false;
+        }
+
         //You can't make a move into your own piece
         //UNLESS its the rook king side stuff
         if(dest.charAt(0) == 'W' && game.turn == 1){
@@ -189,8 +196,36 @@ public class MoveValidation {
             //Rook
             case 'R':
 
+                if(move[0][0] == move[1][0]){
+                    int distance = move[0][1] - move[1][1];
+                    for(int i = 0; i<distance; i++) {
+                        String piece = game.board.board[move[0][0]][move[0][1]+i];
+                        if(piece.charAt(0) != '_'){
+                            //Break loop and change destination move. Move is valid
+                            //If the piece is an enemy then destination is updated
+                            //If the piece is friendly then destination is updated - 1.
+                            //possible bug where you can use rooks to not move! based on moving into a friendly position
+                            //check on a way to catch this
+                            //RETURN TRUE!
+                            if((piece.charAt(0) == 'W' && game.turn == 0) || piece.charAt(0) == 'B' && game.turn == 1) {
+                                move[1][1] = move[0][1] + i;
+                                return true;
+                            }
+                            else{
+                                move[1][1] = move[0][1] + (i-1);
+                            }
+
+                        }
+
+                    }
+
+                }
+
+                if(move[0][1] == move[1][1]){
+                    int distance = move[0][0] - move[1][0];
 
 
+                }
 
                 break;
             //Bishop

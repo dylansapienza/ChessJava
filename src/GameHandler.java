@@ -4,7 +4,7 @@ public class GameHandler {
 
     String w_name;
     String b_name;
-    int turn = 0; // Black = 1, White = 0
+    int turn = 0; //White : 1, Black : 0
     ChessBoard board;
 
 
