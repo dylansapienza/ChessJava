@@ -89,11 +89,13 @@ public class MoveValidation {
         //origin.charAt 1 will give us the piece type
         //from our origin location, locate all the possible destinations
         //if dest != possible destination invalid!
+        //Consider abstracting away all the move checks into functions!
         switch (origin.charAt(1)){
             //Pawn
             case 'P':
                 //1. Can move forward one square
-                if(game.turn == 1){
+                //Check to make sure the pawn isnt going straight into an enemy
+                if(dest.charAt(0) != 'B' && game.turn == 1){
 
                      if(move[1][0] == move[0][0] -1 && move[1][1] == move[0][1]){
                          return true;
@@ -101,20 +103,94 @@ public class MoveValidation {
 
                 }
 
-                if(game.turn == 0){
+                if(dest.charAt(0) != 'W' && game.turn == 0){
                     if(move[1][0] == move[0][0] +1 && move[1][1] == move[0][1]){
                         return true;
+                    }
+                }
+
+                //If there is a diag opponent, allow attack dest
+
+                if(dest.charAt(0) == 'W' && game.turn == 0) {
+                    if (game.turn == 0) {
+
+                        if (move[1][0] == move[0][0] + 1 && move[1][1] == move[0][1] + 1) {
+                            return true;
+                        }
+
+                        if (move[1][0] == move[0][0] + 1 && move[1][1] == move[0][1] - 1) {
+                            return true;
+                        }
+                    }
+
+                }
+
+                if(dest.charAt(0) == 'B' && game.turn == 1){
+                    if(game.turn == 1){
+
+                        if(move[1][0] == move[0][0] -1 && move[1][1] == move[0][1] - 1){
+                            return true;
+                        }
+
+                        if(move[1][0] == move[0][0] -1 && move[1][1] == move[0][1] + 1){
+                            return true;
+                        }
+
                     }
                 }
 
 
                 break;
             //Knight
+
             case 'K':
+
+                if(move[1][0] == move[0][0] -2 && move[1][1] == move[0][1] + 1){
+                    return true;
+                }
+
+
+                if(move[1][0] == move[0][0] -2 && move[1][1] == move[0][1] - 1){
+                    return true;
+                }
+
+
+                if(move[1][0] == move[0][0] -1 && move[1][1] == move[0][1] + 2){
+                    return true;
+                }
+
+
+                if(move[1][0] == move[0][0] -1 && move[1][1] == move[0][1] - 2){
+                    return true;
+                }
+
+                ///
+
+                if(move[1][0] == move[0][0] +2 && move[1][1] == move[0][1] + 1){
+                    return true;
+                }
+
+
+                if(move[1][0] == move[0][0] +2 && move[1][1] == move[0][1] - 1){
+                    return true;
+                }
+
+
+                if(move[1][0] == move[0][0] +1 && move[1][1] == move[0][1] + 2){
+                    return true;
+                }
+
+
+                if(move[1][0] == move[0][0] +1 && move[1][1] == move[0][1] - 2){
+                    return true;
+                }
 
                 break;
             //Rook
             case 'R':
+
+
+
 
                 break;
             //Bishop
