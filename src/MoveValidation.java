@@ -196,10 +196,26 @@ public class MoveValidation {
             //Rook
             case 'R':
 
+                String piece;
+                int direction = 0;
+                int distance = 0;
+
                 if(move[0][0] == move[1][0]){
-                    int distance = move[0][1] - move[1][1];
+
+                    distance = move[0][1] - move[1][1];
+                    if(distance < 0){
+                        direction = -1;
+                        distance *= -1;
+                    }
                     for(int i = 0; i<distance; i++) {
-                        String piece = game.board.board[move[0][0]][move[0][1]+i];
+
+                        if(direction == -1) {
+                            piece = game.board.board[move[0][0]][move[0][1] + i];
+
+                        }else{
+                            piece = game.board.board[move[0][0]][move[0][1] - i];
+                        }
+
                         if(piece.charAt(0) != '_'){
                             //Break loop and change destination move. Move is valid
                             //If the piece is an enemy then destination is updated
@@ -208,11 +224,12 @@ public class MoveValidation {
                             //check on a way to catch this
                             //RETURN TRUE!
                             if((piece.charAt(0) == 'W' && game.turn == 0) || piece.charAt(0) == 'B' && game.turn == 1) {
-                                move[1][1] = move[0][1] + i;
+                                move[1][1] = move[0][1] + i; //<- need to pass these values back to update
                                 return true;
                             }
                             else{
                                 move[1][1] = move[0][1] + (i-1);
+                                return true;
                             }
 
                         }
@@ -221,10 +238,56 @@ public class MoveValidation {
 
                 }
 
-                if(move[0][1] == move[1][1]){
-                    int distance = move[0][0] - move[1][0];
+                if(move[0][1] == move[1][1]) {
+
+                    distance = move[0][0] - move[1][0];
+                    if (distance < 0) {
+                        direction = -1;
+                        distance *= -1;
+                    }
+
+                    for (int i = 0; i < distance; i++) {
+
+                        if (direction == -1) {
+                            piece = game.board.board[move[0][0] + i][move[0][1]];
+
+                        } else {
+                            piece = game.board.board[move[0][0] - i][move[0][1] - i];
+                        }
+
+                        if(piece.charAt(0) != '_'){
+                            //Break loop and change destination move. Move is valid
+                            //If the piece is an enemy then destination is updated
+                            //If the piece is friendly then destination is updated - 1.
+                            //possible bug where you can use rooks to not move! based on moving into a friendly position
+                            //check on a way to catch this
+                            //RETURN TRUE!
+                            if((piece.charAt(0) == 'W' && game.turn == 0) || piece.charAt(0) == 'B' && game.turn == 1) {
+                                if(direction == -1) {
+                                    move[1][0] = move[0][0] + i;
+                                    return true;
+                                }
+                                else{
+                                    move[1][0] = move[0][0] - i;
+                                    return true;
+                                }
+                            }
+                            else{
+                                if(direction == -1) {
+                                    move[1][0] = move[0][0] + (i-1);
+                                    return true;
+                                }
+                                else{
+                                    move[1][0] = move[0][0] - (i-1);
+                                    return true;
+                                }
+
+                            }
+
+                        }
 
 
+                    }
                 }
 
                 break;
